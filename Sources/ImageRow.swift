@@ -74,6 +74,7 @@ open class _ImageRow<Cell: CellType>: OptionsRow<Cell>, PresenterRowType, ImageR
   open var onPresentCallback: ((FormViewController, PresenterRow) -> Void)?
 
   open var sourceTypes: ImageRowSourceTypes
+  open var allowsEditing: Bool = false
   open var imageURL: URL?
   open var clearAction = ImageClearAction.yes(style: .destructive)
   open var placeholderImage: UIImage?
@@ -98,6 +99,7 @@ open class _ImageRow<Cell: CellType>: OptionsRow<Cell>, PresenterRowType, ImageR
       if let controller = presentationMode.makeController(){
         controller.row = self
         controller.sourceType = sourceType
+        controller.allowsEditing = allowsEditing
         onPresentCallback?(cell.formViewController()!, controller)
         presentationMode.present(controller, row: self, presentingController: cell.formViewController()!)
       } else {
